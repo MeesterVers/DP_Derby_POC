@@ -6,11 +6,11 @@ public class Main{
 	public static void main(String[] arg) throws SQLException {
 		// DerbyBaseDao connectionTest = new DerbyBaseDao(); check connection hier
 		
-			ReizigerDerbyDaolmpl ro1 = new ReizigerDerbyDaolmpl();
+		ReizigerDerbyDaolmpl ro1 = new ReizigerDerbyDaolmpl();
 		OVChipkaartDerbyDAOImpl ov1 = new OVChipkaartDerbyDAOImpl();
 
 		// nieuwe reiziger
-//		 Reiziger r1 = new Reiziger(2, "Bokoe", "", "Sam", java.sql.Date.valueOf("1990-03-10"));
+//		 Reiziger r1 = new Reiziger(4, "Klaas", "", "Nom", java.sql.Date.valueOf("1994-04-8"));
 //		 ro1.save(r1);
 
 		// loop om alles te zien
@@ -20,13 +20,13 @@ public class Main{
 		 	System.out.println("Reiziger: #" +reiziger.getReizigerID() + " "+reiziger.getVoorletters()+ ". "+ reiziger.getTussenvoegsel()+" "+reiziger.getAchternaam()+ " geboortedatum: " +reiziger.getGbdatum());
 		 }
 
-		// find by date reizigers
-		// System.out.println("\nGevonden reizigers: ");
-		// List<Reiziger> gevonden_reizigers = ro1.findByGBdatum("1990-12-23");
-		// for (Reiziger gevonden_reiziger : gevonden_reizigers) {
-		// 	System.out.println("Reiziger: #" +gevonden_reiziger.getReizigerID() + " "+gevonden_reiziger.getVoorletters()+ ". "+ gevonden_reiziger.getTussenvoegsel()+" "+gevonden_reiziger.getAchternaam()+ " geboortedatum: " +gevonden_reiziger.getGbdatum());
-		// }
-		
+//		 find by date reizigers
+		 System.out.println("\nGevonden reizigers: ");
+		 List<Reiziger> gevonden_reizigers = ro1.findByGBdatum("1992-05-04");
+		 for (Reiziger gevonden_reiziger : gevonden_reizigers) {
+		 	System.out.println("Reiziger: #" +gevonden_reiziger.getReizigerID() + " "+gevonden_reiziger.getVoorletters()+ ". "+ gevonden_reiziger.getTussenvoegsel()+" "+gevonden_reiziger.getAchternaam()+ " geboortedatum: " +gevonden_reiziger.getGbdatum());
+		 }
+//		
 		// OVChipkaart test
 		//Nieuw OvChipkaart
 		// Ovchipkaart k1 = new Ovchipkaart(2111111111, java.sql.Date.valueOf("2025-12-23"), 1, 10, 2);
