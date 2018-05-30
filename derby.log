@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed May 30 04:55:23 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0163-aef8-acd2-00000706ee48 
+on database directory C:\Users\Admin\eclipse-workspace\EE Projects\DP-OVChipkaartDerby\ConnectingCreatinJavaDB with class loader sun.misc.Launcher$AppClassLoader@5c647e05 
+Loaded from file:/C:/Users/Admin/eclipse-workspace/EE%20Projects/DP-OVChipkaartDerby/src/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_161-b12
+user.dir=C:\Users\Admin\eclipse-workspace\EE Projects\DP-OVChipkaartDerby
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
