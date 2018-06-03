@@ -6,6 +6,7 @@ public class Ovchipkaart {
 	private int klasse;
 	private int saldo;
 	private int reizigerid;
+	private Reiziger reiziger;
 	
 	
 	public Ovchipkaart(int kaartnummer, Date geldigtot, int klasse, int saldo, int reizigerid) {
