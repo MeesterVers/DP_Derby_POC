@@ -4,11 +4,13 @@ import java.util.*;
 
 public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 	private static Connection conn;
+	private List<Reiziger> reizigers = new ArrayList<Reiziger>();
 
 	public List<Reiziger> findAll() throws SQLException {
-		conn = DerbyBaseDao.getConnection();
-		String query = "SELECT * FROM REIZIGER";
 		List<Reiziger> reizigers = new ArrayList<Reiziger>();
+		conn = DerbyBaseDao.getConnection();
+
+		String query = "SELECT * FROM REIZIGER";
 		Statement statement = conn.createStatement();
 		ResultSet result = statement.executeQuery(query);
 
@@ -36,8 +38,9 @@ public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 	}
 
 	public List<Reiziger> findByGBdatum(String GBdatum) throws SQLException {
-		conn = DerbyBaseDao.getConnection();
 		List<Reiziger> reizigers = new ArrayList<Reiziger>();
+		conn = DerbyBaseDao.getConnection();
+
 		PreparedStatement statement = conn.prepareStatement("SELECT * FROM Reiziger WHERE gebortedatum = ?");    
 		statement.setDate(1, java.sql.Date.valueOf(GBdatum));    
 		ResultSet result = statement.executeQuery();

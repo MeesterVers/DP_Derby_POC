@@ -7,9 +7,10 @@ public class OVChipkaartDerbyDAOImpl extends DerbyBaseDao implements OVChipkaart
 	private List<Ovchipkaart> ovchipkaart = new ArrayList<Ovchipkaart>();
 
 	public List<Ovchipkaart> findAll() throws SQLException {
+		List<Ovchipkaart> ovchipkaart = new ArrayList<Ovchipkaart>();
 		conn = DerbyBaseDao.getConnection();
+
 		String query = "SELECT * FROM ov_chipkaart";
-		
 		Statement statement = conn.createStatement();
 		ResultSet result = statement.executeQuery(query);
 
@@ -37,7 +38,9 @@ public class OVChipkaartDerbyDAOImpl extends DerbyBaseDao implements OVChipkaart
 	}
 
 	public List<Ovchipkaart> findByReiziger(int reizigerid) throws SQLException {
+		List<Ovchipkaart> ovchipkaart = new ArrayList<Ovchipkaart>();
 		conn = DerbyBaseDao.getConnection();
+		
 		PreparedStatement statement = conn.prepareStatement("SELECT * FROM ov_chipkaart WHERE reizigerid = ?");    
 		statement.setInt(1, reizigerid);    
 		ResultSet result = statement.executeQuery();

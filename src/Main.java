@@ -29,8 +29,8 @@ public class Main{
 //		
 		// OVChipkaart test
 		//Nieuw OvChipkaart
-		// Ovchipkaart k1 = new Ovchipkaart(2111111111, java.sql.Date.valueOf("2025-12-23"), 1, 10, 2);
-		// ov1.save(k1);
+//		 Ovchipkaart k1 = new Ovchipkaart(3, java.sql.Date.valueOf("2025-12-23"), 2, 8, 3);
+//		 ov1.save(k1);
 
 		// loop om alles te zien
 		System.out.println("\nAlle OvChipkarten: ");
