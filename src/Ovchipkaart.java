@@ -17,6 +17,13 @@ public class Ovchipkaart {
 		this.reizigerid = reizigerid;
 	}
 
+	public Ovchipkaart(Date geldigtot, int klasse, int saldo, int reizigerid) {
+		this.geldigtot = geldigtot;
+		this.klasse = klasse;
+		this.saldo = saldo;
+		this.reizigerid = reizigerid;
+	}
+
 
 	public int getKaartnummer() {
 		return kaartnummer;

@@ -69,14 +69,13 @@ public class OVChipkaartDerbyDAOImpl extends DerbyBaseDao implements OVChipkaart
 	
 	public Ovchipkaart save(Ovchipkaart ovchipkaart) throws SQLException{
 		conn = DerbyBaseDao.getConnection();
-		String query = "INSERT INTO ov_chipkaart (kaartnummer, geldigtot, klasse, saldo, reizigerid) VALUES (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO ov_chipkaart (geldigtot, klasse, saldo, reizigerid) VALUES (?, ?, ?, ?)";
 
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setInt(1, ovchipkaart.getKaartnummer());
-		statement.setDate(2, ovchipkaart.getGeldigtot());
-		statement.setInt(3, ovchipkaart.getKlasse());
-		statement.setInt(4, ovchipkaart.getSaldo());
-		statement.setInt(5, ovchipkaart.getReizigerid());
+		statement.setDate(1, ovchipkaart.getGeldigtot());
+		statement.setInt(2, ovchipkaart.getKlasse());
+		statement.setInt(3, ovchipkaart.getSaldo());
+		statement.setInt(4, ovchipkaart.getReizigerid());
 
 
 		int rowsInserted = statement.executeUpdate();

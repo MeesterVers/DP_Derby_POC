@@ -10,7 +10,7 @@ public class Main{
 		OVChipkaartDerbyDAOImpl ov1 = new OVChipkaartDerbyDAOImpl();
 
 		// nieuwe reiziger
-//		 Reiziger r1 = new Reiziger(4, "Klaas", "", "Nom", java.sql.Date.valueOf("1994-04-8"));
+//		 Reiziger r1 = new Reiziger("Klaas", "", "Nom", java.sql.Date.valueOf("1994-04-8"));
 //		 ro1.save(r1);
 
 		// loop om alles te zien
@@ -29,7 +29,7 @@ public class Main{
 //		
 		// OVChipkaart test
 		//Nieuw OvChipkaart
-//		 Ovchipkaart k1 = new Ovchipkaart(3, java.sql.Date.valueOf("2025-12-23"), 2, 8, 3);
+//		 Ovchipkaart k1 = new Ovchipkaart(java.sql.Date.valueOf("2025-12-23"), 2, 8, 3);
 //		 ov1.save(k1);
 
 		// loop om alles te zien

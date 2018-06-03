@@ -70,14 +70,13 @@ public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 	
 	public Reiziger save(Reiziger reiziger) throws SQLException{
 		conn = DerbyBaseDao.getConnection();
-		String query = "INSERT INTO reiziger (reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum) VALUES (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO reiziger (voorletters, tussenvoegsel, achternaam, gebortedatum) VALUES (?, ?, ?, ?)";
 
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setInt(1, reiziger.getReizigerID());
-		statement.setString(2, reiziger.getVoorletters());
-		statement.setString(3, reiziger.getTussenvoegsel());
-		statement.setString(4, reiziger.getAchternaam());
-		statement.setDate(5, reiziger.getGbdatum());
+		statement.setString(1, reiziger.getVoorletters());
+		statement.setString(2, reiziger.getTussenvoegsel());
+		statement.setString(3, reiziger.getAchternaam());
+		statement.setDate(4, reiziger.getGbdatum());
 
 		int rowsInserted = statement.executeUpdate();
 		if (rowsInserted > 0) {
