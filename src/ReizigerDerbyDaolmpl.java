@@ -13,24 +13,16 @@ public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 		String query = "SELECT * FROM REIZIGER";
 		Statement statement = conn.createStatement();
 		ResultSet result = statement.executeQuery(query);
-
-		// Iets doen met de resultaten
-		int reizigerID;
-		String voorletters;
-		String tussenvoegsel;
-		String achternaam;
-		Date gebortedatum;
-		Reiziger obj;
 		
 		while (result.next()) {
-			reizigerID = result.getInt("reizigerID");
-			voorletters = result.getString("voorletters");
-			tussenvoegsel = result.getString("tussenvoegsel");
-			achternaam = result.getString("achternaam");
-			gebortedatum = result.getDate("gebortedatum");
+			int reizigerID = result.getInt("reizigerID");
+			String voorletters = result.getString("voorletters");
+			String tussenvoegsel = result.getString("tussenvoegsel");
+			String achternaam = result.getString("achternaam");
+			Date gebortedatum = result.getDate("gebortedatum");
 
-			obj = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
-			reizigers.add(obj);
+			Reiziger reiziger = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
+			reizigers.add(reiziger);
 		}
 		conn.close();
 		result.close();
@@ -44,39 +36,57 @@ public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 		PreparedStatement statement = conn.prepareStatement("SELECT * FROM Reiziger WHERE gebortedatum = ?");    
 		statement.setDate(1, java.sql.Date.valueOf(GBdatum));    
 		ResultSet result = statement.executeQuery();
-
-		// Iets doen met de resultaten
-		int reizigerID;
-		String voorletters;
-		String tussenvoegsel;
-		String achternaam;
-		Date gebortedatum;
-		Reiziger obj;
 		
 		while (result.next()) {
-			reizigerID = result.getInt("reizigerID");
-			voorletters = result.getString("voorletters");
-			tussenvoegsel = result.getString("tussenvoegsel");
-			achternaam = result.getString("achternaam");
-			gebortedatum = result.getDate("gebortedatum");
+			int reizigerID = result.getInt("reizigerID");
+			String voorletters = result.getString("voorletters");
+			String tussenvoegsel = result.getString("tussenvoegsel");
+			String achternaam = result.getString("achternaam");
+			Date gebortedatum = result.getDate("gebortedatum");
 
-			obj = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
-			reizigers.add(obj);
+			Reiziger reiziger = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
+			reizigers.add(reiziger);
 		}
 		conn.close();
 		result.close();
 		return reizigers;
 	}
 	
+	
+	public Reiziger findByReizigerID(int reizigerid) throws SQLException {
+		conn = DerbyBaseDao.getConnection();
+
+		PreparedStatement statement = conn.prepareStatement("SELECT * FROM Reiziger WHERE reizigerid = ?");    
+		statement.setInt(1, reizigerid);    
+		ResultSet result = statement.executeQuery();
+
+		// Iets doen met de resultaten
+		Reiziger reiziger = null;
+		
+		while (result.next()) {
+			int reizigerID = result.getInt("reizigerID");
+			String voorletters = result.getString("voorletters");
+			String tussenvoegsel = result.getString("tussenvoegsel");
+			String achternaam = result.getString("achternaam");
+			Date gebortedatum = result.getDate("gebortedatum");
+
+			reiziger = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
+		}
+		conn.close();
+		result.close();
+		return reiziger;
+	}
+	
 	public Reiziger save(Reiziger reiziger) throws SQLException{
 		conn = DerbyBaseDao.getConnection();
-		String query = "INSERT INTO reiziger (voorletters, tussenvoegsel, achternaam, gebortedatum) VALUES (?, ?, ?, ?)";
+		String query = "INSERT INTO reiziger (reizigerid, voorletters, tussenvoegsel, achternaam, gebortedatum) VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, reiziger.getVoorletters());
-		statement.setString(2, reiziger.getTussenvoegsel());
-		statement.setString(3, reiziger.getAchternaam());
-		statement.setDate(4, reiziger.getGbdatum());
+		statement.setInt(1, reiziger.getReizigerID());
+		statement.setString(2, reiziger.getVoorletters());
+		statement.setString(3, reiziger.getTussenvoegsel());
+		statement.setString(4, reiziger.getAchternaam());
+		statement.setDate(5, reiziger.getGbdatum());
 
 		int rowsInserted = statement.executeUpdate();
 		if (rowsInserted > 0) {

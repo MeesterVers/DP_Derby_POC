@@ -16,16 +16,8 @@ public class Reiziger {
     	this.gbdatum = gbdatum;
     }
 
-
-    public Reiziger(String voorletters, String tussenvoegsel, String achternaam, Date gbdatum) {
-        this.voorletters = voorletters;
-        this.tussenvoegsel = tussenvoegsel;
-        this.achternaam = achternaam;
-        this.gbdatum = gbdatum;
-    }
-
     
-    public int getReizigerID() {
+  public int getReizigerID() {
       return reizigerID;
   }
 

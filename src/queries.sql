@@ -1,5 +1,5 @@
 Create table Reiziger(
-	reizigerID integer NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	reizigerid integer NOT NULL,
 	voorletters varchar(10),
 	tussenvoegsel varchar(10),
 	achternaam varchar(10),
@@ -8,7 +8,7 @@ Create table Reiziger(
 );
 
 Create table ov_chipkaart(
-	kaartnummer integer NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	kaartnummer integer NOT NULL,
 	geldigtot date,
 	klasse integer,
 	saldo integer,
@@ -18,7 +18,7 @@ Create table ov_chipkaart(
 );
 
 INSERT INTO REIZIGER (reizigerid, voorletters, tussenvoegsel, achternaam, gebortedatum) VALUES (1, 'j', 'Zone', 'Johnna', '04.05.1992');
-INSERT INTO ov_chipkaart (kaartnummer, geldigtot, klasse, saldo, reizigerid) VALUES (1, '10.05.2024', 2, 5, 1), (2, '10.05.2028', 1, 10, 1);
+INSERT INTO ov_chipkaart (geldigtot, klasse, saldo, reizigerid) VALUES (1, '10.05.2024', 2, 5, 1), (2, '10.05.2028', 1, 10, 1);
 
 
 ----------------------------------------

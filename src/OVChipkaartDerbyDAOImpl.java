@@ -4,78 +4,64 @@ import java.util.*;
 
 public class OVChipkaartDerbyDAOImpl extends DerbyBaseDao implements OVChipkaartDao{
 	private static Connection conn;
-	private List<Ovchipkaart> ovchipkaart = new ArrayList<Ovchipkaart>();
+	private List<Ovchipkaart> ovchipkarten = new ArrayList<Ovchipkaart>();
 
 	public List<Ovchipkaart> findAll() throws SQLException {
-		List<Ovchipkaart> ovchipkaart = new ArrayList<Ovchipkaart>();
+		List<Ovchipkaart> ovchipkarten = new ArrayList<Ovchipkaart>();
 		conn = DerbyBaseDao.getConnection();
 
 		String query = "SELECT * FROM ov_chipkaart";
 		Statement statement = conn.createStatement();
 		ResultSet result = statement.executeQuery(query);
 
-		// Iets doen met de resultaten
-		int kaartnummer;
-		Date geldigtot;
-		int klasse;
-		int saldo;
-		int reizigerid;
-		Ovchipkaart obj;
-		
 		while (result.next()) {
-			kaartnummer = result.getInt("kaartnummer");
-			geldigtot = result.getDate("geldigtot");
-			klasse = result.getInt("klasse");
-			saldo = result.getInt("saldo");
-			reizigerid = result.getInt("reizigerid");
+			int kaartnummer = result.getInt("kaartnummer");
+			Date geldigtot = result.getDate("geldigtot");
+			int klasse = result.getInt("klasse");
+			int saldo = result.getInt("saldo");
+			int reizigerid = result.getInt("reizigerid");
 
-			obj = new Ovchipkaart(kaartnummer, geldigtot, klasse, saldo, reizigerid);
-			ovchipkaart.add(obj);
+			Ovchipkaart ovchipkaart = new Ovchipkaart(kaartnummer, geldigtot, klasse, saldo, reizigerid);
+			ovchipkarten.add(ovchipkaart);
 		}
 		conn.close();
 		result.close();
-		return ovchipkaart;
+		return ovchipkarten;
 	}
 
 	public List<Ovchipkaart> findByReiziger(int reizigerid) throws SQLException {
-		List<Ovchipkaart> ovchipkaart = new ArrayList<Ovchipkaart>();
+		List<Ovchipkaart> ovchipkarten = new ArrayList<Ovchipkaart>();
 		conn = DerbyBaseDao.getConnection();
 		
 		PreparedStatement statement = conn.prepareStatement("SELECT * FROM ov_chipkaart WHERE reizigerid = ?");    
 		statement.setInt(1, reizigerid);    
 		ResultSet result = statement.executeQuery();
 
-		// Iets doen met de resultaten
-		int kaartnummer;
-		Date geldigtot;
-		int klasse;
-		int saldo;
-		Ovchipkaart obj;
-		
 		while (result.next()) {
-			kaartnummer = result.getInt("kaartnummer");
-			geldigtot = result.getDate("geldigtot");
-			klasse = result.getInt("klasse");
-			saldo = result.getInt("saldo");
+			int kaartnummer = result.getInt("kaartnummer");
+			Date geldigtot = result.getDate("geldigtot");
+			int klasse = result.getInt("klasse");
+			int saldo = result.getInt("saldo");
 			reizigerid = result.getInt("reizigerid");
 
-			obj = new Ovchipkaart(kaartnummer, geldigtot, klasse, saldo, reizigerid);
-			ovchipkaart.add(obj);;
+			Ovchipkaart ovchipkaart = new Ovchipkaart(kaartnummer, geldigtot, klasse, saldo, reizigerid);
+			ovchipkarten.add(ovchipkaart);;
 		}
 		conn.close();
 		result.close();
-		return ovchipkaart;
+		return ovchipkarten;
 	}
 	
-	public Ovchipkaart save(Ovchipkaart ovchipkaart) throws SQLException{
+	public Ovchipkaart save(Ovchipkaart ovchipkaart, Reiziger reiziger) throws SQLException{
 		conn = DerbyBaseDao.getConnection();
-		String query = "INSERT INTO ov_chipkaart (geldigtot, klasse, saldo, reizigerid) VALUES (?, ?, ?, ?)";
+		String query = "INSERT INTO ov_chipkaart (kaartnummer, geldigtot, klasse, saldo, reizigerid) VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setDate(1, ovchipkaart.getGeldigtot());
-		statement.setInt(2, ovchipkaart.getKlasse());
-		statement.setInt(3, ovchipkaart.getSaldo());
-		statement.setInt(4, ovchipkaart.getReizigerid());
+		statement.setInt(1, ovchipkaart.getKaartnummer());
+		statement.setDate(2, ovchipkaart.getGeldigtot());
+		statement.setInt(3, ovchipkaart.getKlasse());
+		statement.setInt(4, ovchipkaart.getSaldo());
+		statement.setInt(5, reiziger.getReizigerID());
 
 
 		int rowsInserted = statement.executeUpdate();
@@ -86,15 +72,16 @@ public class OVChipkaartDerbyDAOImpl extends DerbyBaseDao implements OVChipkaart
 		return ovchipkaart;
 	}
 	
-	public Ovchipkaart update(Ovchipkaart ovchipkaart) throws SQLException {
+	public Ovchipkaart update(Ovchipkaart ovchipkaart, Reiziger reiziger) throws SQLException {
 		conn = DerbyBaseDao.getConnection();
-		String query = "UPDATE ov_chipkaart set geldigtot = ?, klasse = ?, saldo = ? WHERE reizigerid = ?";
+		String query = "UPDATE ov_chipkaart set geldigtot = ?, klasse = ?, saldo = ? WHERE kaartnummer = ? AND reizigerid = ?";
 
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setDate(1, ovchipkaart.getGeldigtot());
 		statement.setInt(2, ovchipkaart.getKlasse());
 		statement.setInt(3, ovchipkaart.getSaldo());
-		statement.setInt(4, ovchipkaart.getReizigerid());
+		statement.setInt(4, ovchipkaart.getKaartnummer());
+		statement.setInt(5, reiziger.getReizigerID());
 
 		int rowsUpdated = statement.executeUpdate();
 		if (rowsUpdated > 0) {
@@ -104,12 +91,13 @@ public class OVChipkaartDerbyDAOImpl extends DerbyBaseDao implements OVChipkaart
 		return ovchipkaart;
 	}
 	
-	public boolean delete(Ovchipkaart ovchipkaart) throws SQLException {
+	public boolean delete(Ovchipkaart ovchipkaart, Reiziger reiziger) throws SQLException {
 		conn = DerbyBaseDao.getConnection();
-		String query = "DELETE FROM ov_chipkaart WHERE kaartnummer = ?";
+		String query = "DELETE FROM ov_chipkaart WHERE kaartnummer = ? AND reizigerid = ?";
 
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setInt(1, ovchipkaart.getKaartnummer());
+		statement.setInt(2, reiziger.getReizigerID());
 
 		int rowsDeleted = statement.executeUpdate();
 		if (rowsDeleted > 0) {
