@@ -1,4 +1,6 @@
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reiziger {
     private int reizigerID;
@@ -6,6 +8,7 @@ public class Reiziger {
     private String tussenvoegsel;
     private String achternaam;
     private Date gbdatum;
+    private ArrayList<Ovchipkaart> ovchipkarten;
 
 
     public Reiziger(int reizigerID, String voorletters, String tussenvoegsel, String achternaam, Date gbdatum) {
@@ -14,6 +17,7 @@ public class Reiziger {
     	this.tussenvoegsel = tussenvoegsel;
     	this.achternaam = achternaam;
     	this.gbdatum = gbdatum;
+    	this.ovchipkarten = new ArrayList<Ovchipkaart>();
     }
 
     
@@ -61,6 +65,16 @@ public Date getGbdatum() {
 
 public void setGbdatum(Date gbdatum) {
     this.gbdatum = gbdatum;
+}
+
+
+public ArrayList<Ovchipkaart> getOvchipkarten() {
+	return ovchipkarten;
+}
+
+
+public void setOvchipkarten(ArrayList<Ovchipkaart> ovchipkarten) {
+	this.ovchipkarten = ovchipkarten;
 }
 
 }

@@ -5,9 +5,13 @@ import java.util.*;
 public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 	private static Connection conn;
 	private List<Reiziger> reizigers = new ArrayList<Reiziger>();
+	private List<Ovchipkaart> ovchipkaarten = new ArrayList<Ovchipkaart>();
+	private OVChipkaartDerbyDAOImpl ov1 = new OVChipkaartDerbyDAOImpl();
 
 	public List<Reiziger> findAll() throws SQLException {
 		List<Reiziger> reizigers = new ArrayList<Reiziger>();
+		List<Ovchipkaart> ovchipkaarten = new ArrayList<Ovchipkaart>();
+		OVChipkaartDerbyDAOImpl ov1 = new OVChipkaartDerbyDAOImpl();
 		conn = DerbyBaseDao.getConnection();
 
 		String query = "SELECT * FROM REIZIGER";
@@ -23,6 +27,10 @@ public class ReizigerDerbyDaolmpl extends DerbyBaseDao implements ReizigerDao{
 
 			Reiziger reiziger = new Reiziger(reizigerID, voorletters, tussenvoegsel, achternaam, gebortedatum);
 			reizigers.add(reiziger);
+			
+			// get ovchipkaarten
+			ovchipkaarten = ov1.findByReiziger(reizigerID);
+			
 		}
 		conn.close();
 		result.close();

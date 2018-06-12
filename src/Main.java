@@ -10,13 +10,13 @@ public class Main{
 
 		// implementaties oproepen
 		ReizigerDerbyDaolmpl ro1 = new ReizigerDerbyDaolmpl();
-		OVChipkaartDerbyDAOImpl ov1 = new OVChipkaartDerbyDAOImpl();
+		 OVChipkaartDerbyDAOImpl ov1 = new OVChipkaartDerbyDAOImpl();
 		// ---------------------------------------------------------------------------------
 
 
 		// nieuwe reiziger
-		// Reiziger r1 = new Reiziger(4, "Sevn", "RAMG", "Sevn", java.sql.Date.valueOf("1990-06-20"));
-		// ro1.delete(r1);
+		// Reiziger r1 = new Reiziger(4, "George", "f", "neef", java.sql.Date.valueOf("1992-06-20"));
+		// ro1.save(r1);
 		 // ------------------------------------------------------------------------------------------
 		
 
@@ -38,19 +38,25 @@ public class Main{
 		// ---------------------------------------------------------------------------------------------------------------------------
 
 		
-		// Nieuw OvChipkaart
-		// Reiziger ro2 = (Reiziger)ro1.findByReizigerID(2);
-		// Ovchipkaart k1 = new Ovchipkaart(2, java.sql.Date.valueOf("2026-10-01"), 1, 120, ro2.getReizigerID());
-		// ov1.update(k1, ro2);
+		// Nieuw OvChipkaart bestaande reiziger
+		// Reiziger r2 = (Reiziger)ro1.findByReizigerID(2);
+		// Ovchipkaart k1 = new Ovchipkaart(5, java.sql.Date.valueOf("2026-10-01"), 1, 120, r2.getReizigerID());
+		// ov1.update(k1, r2);
+		// ----------------------------------------------------------------------------------------------------------------------------
+
+
+		// Nieuw OvChipkaart nieuwe reiziger
+		// Ovchipkaart k1 = new Ovchipkaart(5, java.sql.Date.valueOf("2022-10-01"), 1, 300, r1.getReizigerID());
+		// ov1.save(k1, r1);
 		// ----------------------------------------------------------------------------------------------------------------------------
 
 
 		// loop alle ovchipkaarten
-		System.out.println("\nAlle OvChipkarten: ");
-		List<Ovchipkaart> ovchipkarten = ov1.findAll();
-		for (Ovchipkaart ovchipkaart : ovchipkarten) {
-			System.out.println("Ovchipkaart: #" +ovchipkaart.getKaartnummer() + " Geldig tot:"+ovchipkaart.getGeldigtot()+ ", Klasse:"+ ovchipkaart.getKlasse()+", Saldo:"+ovchipkaart.getSaldo()+ " rezigerID: " +ovchipkaart.getReizigerid());
-		}
+		 System.out.println("\nAlle OvChipkarten: ");
+		 List<Ovchipkaart> ovchipkarten = ov1.findAll();
+		 for (Ovchipkaart ovchipkaart : ovchipkarten) {
+		 	System.out.println("Ovchipkaart: #" +ovchipkaart.getKaartnummer() + " Geldig tot:"+ovchipkaart.getGeldigtot()+ ", Klasse:"+ ovchipkaart.getKlasse()+", Saldo:"+ovchipkaart.getSaldo()+ " rezigerID: " +ovchipkaart.getReizigerid());
+		 }
 		// ------------------------------------------------------------------------------------------------------------------------------
 
 		// find ovchipkaart by reizigerid
